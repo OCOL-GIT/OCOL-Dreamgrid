@@ -1862,5 +1862,10 @@ namespace OpenSim.Region.ScriptEngine.Shared.ScriptBase
         {
             return m_OSSL_Functions.osListAsRotation(src, index);
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void xsSetAvatarHitboxSize(float HitBoxSize, float footheight)
+        {
+            m_OSSL_Functions.xsSetAvatarHitboxSize(HitBoxSize, footheight);
+        }
     }
 }

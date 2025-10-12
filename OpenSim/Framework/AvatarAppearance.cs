@@ -46,7 +46,7 @@ namespace OpenSim.Framework
         // constrains  for ubitode physics
         const float AVBOXMINX = 0.2f;
         const float AVBOXMINY = 0.3f;
-        const float AVBOXMINZ = 1.2f;
+        const float AVBOXMINZ = 0.1f;
 
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -466,6 +466,33 @@ namespace OpenSim.Framework
             if (m_avatarBoxSize.Z < AVBOXMINZ)
                 m_avatarBoxSize.Z = AVBOXMINZ;
             m_avatarHeight = m_avatarSize.Z;
+        }
+        public void SetHitBoxSize(Vector3 inputsize)
+        {
+        /*  if (avSize.X > 32f)
+                avSize.X = 32f;
+            else if (avSize.X < 0.1f)
+                avSize.X = 0.1f;
+
+            if (avSize.Y > 32f)
+                avSize.Y = 32f;
+            else if (avSize.Y < 0.1f)
+                avSize.Y = 0.1f;
+            if (avSize.Z > 32f)
+                avSize.Z = 32f;
+            else if (avSize.Z < 0.1f)
+                avSize.Z = 0.1f; */
+
+            m_avatarSize = inputsize;
+            m_avatarBoxSize = inputsize;
+            m_avatarBoxSize.Z += AVBOXAJUST;
+            if (m_avatarBoxSize.X < AVBOXMINX)
+                m_avatarBoxSize.X = AVBOXMINX;
+            if (m_avatarBoxSize.Y < AVBOXMINY)
+                m_avatarBoxSize.Y = AVBOXMINY;
+            if (m_avatarBoxSize.Z < AVBOXMINZ)
+                m_avatarBoxSize.Z = AVBOXMINZ;
+            m_avatarHeight = (m_avatarSize.Z);
         }
 
         public void SetWearable(int wearableId, AvatarWearable wearable)

@@ -6879,5 +6879,24 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
             }
             return LSL_Rotation.Identity;
         }
+        public void xsSetAvatarHitboxSize(float HitBoxSize, float footheight)
+        {
+            ScenePresence avatar_t = World.GetScenePresence(m_host.OwnerID);
+
+
+            if (avatar_t != null)
+            {
+
+                Vector3 avsizetemp = avatar_t.Appearance.AvatarBoxSize;
+                avsizetemp.Z = HitBoxSize;
+                avatar_t.SetSize(avsizetemp, footheight); //API > ScenePresence > PhysicsActor. Allows my avatar to move down when the hitbox is resized.
+                avatar_t.Appearance.SetHitBoxSize(avsizetemp); // Changes the hitbox size, but avatar will float if the above code isn't there.
+            }
+        }
+
+
+
+
+
     }
 }
